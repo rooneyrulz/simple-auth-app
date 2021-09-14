@@ -39,7 +39,7 @@ exports.getUserProfile = async (req, res, next) => {
     const profile = await Profile.findOne({ owner: req.user }).lean();
     if (!profile) return res.status(404).send("User profile not found..");
     profile.owner = await getUserById(profile.owner);
-    return res.status(200).json(profile);
+    return res.status(200).json({ ...profile, owner: profile.owner._doc });
   } catch (error) {
     return res.status(500).json(error);
   }
@@ -47,7 +47,6 @@ exports.getUserProfile = async (req, res, next) => {
 
 exports.updateProfile = async (req, res, next) => {
   const { profile_id } = req.params;
-  console.log(req);
   try {
     if (req.user) {
       const profile = await Profile.findOne()
