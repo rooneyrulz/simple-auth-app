@@ -50,6 +50,26 @@ exports.loginAsAdmin = async (req, res, next) => {
   }
 };
 
+exports.updateUser = async (req, res, next) => {
+  const { id } = req.params;
+  try {
+    const user = await User.findById(id).lean();
+    if (!user) return res.status(400).send("User does not exist");
+    if(req.body.password)
+      const hashedPwd = await hash(password, 12);
+      req.body.password = hashedPwd;
+    const newUser = await User.findByIdAndUpdate(
+      { _id: id },
+      { ...req.body },
+      { new: true }
+    );
+    return res.status(200).json(newUser);
+  } catch (error) {
+    console.log(error.message);
+    return res.status(500).json(error);
+  }
+};
+
 exports.authUser = async (req, res, next) => {
   try {
     if (req.user) {
