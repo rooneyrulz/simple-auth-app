@@ -19,6 +19,7 @@ db(app);
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-app.use("/api/v1/auth", require("./routes/auth"));
+app.use("/api/v1/user", require("./routes/user"));
+app.use("/api/v1/admin", require("./routes/admin"));
 
 module.exports = app;
