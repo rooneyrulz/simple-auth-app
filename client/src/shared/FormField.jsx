@@ -21,12 +21,9 @@ const FormField = ({ isRegister = false }) => {
   return (
     <>
       <FormControl fullWidth className={classes.formControl}>
-        <FormLabel classes={{ root: classes.formLabel }} htmlFor='username'>
-          Username
-        </FormLabel>
+        <FormLabel classes={{ root: classes.formLabel }}>Username</FormLabel>
         <TextField
           fullWidth
-          id='username'
           name='username'
           value={values.username}
           onChange={handleChange}
@@ -38,12 +35,9 @@ const FormField = ({ isRegister = false }) => {
       </FormControl>
       {isRegister ? (
         <FormControl fullWidth className={classes.formControl}>
-          <FormLabel classes={{ root: classes.formLabel }} htmlFor='email'>
-            Email
-          </FormLabel>
+          <FormLabel classes={{ root: classes.formLabel }}>Email</FormLabel>
           <TextField
             fullWidth
-            id='email'
             name='email'
             value={values.email}
             onChange={handleChange}
@@ -55,13 +49,10 @@ const FormField = ({ isRegister = false }) => {
         </FormControl>
       ) : null}
       <FormControl fullWidth className={classes.formControl}>
-        <FormLabel classes={{ root: classes.formLabel }} htmlFor='password'>
-          Password
-        </FormLabel>
+        <FormLabel classes={{ root: classes.formLabel }}>Password</FormLabel>
         <TextField
           fullWidth
           type='password'
-          id='password'
           name='password'
           value={values.password}
           onChange={handleChange}

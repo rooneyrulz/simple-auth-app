@@ -61,7 +61,7 @@ const Register = () => {
         className={classes.root}
         direction='column'
         alignItems='center'
-        justify='center'
+        justifyContent='center'
       >
         <Card className={classes.card} elevation={2}>
           <CardContent>

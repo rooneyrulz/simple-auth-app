@@ -29,3 +29,61 @@ export const loginAsAdmin = (body, setSubmitting) => async (dispatch) => {
     setSubmitting(false);
   }
 };
+
+// GET USERS
+export const getUsers = () => async (dispatch) => {
+  const config = {
+    header: {
+      "Content-Type": "application/json",
+    },
+  };
+
+  try {
+    const { data } = await axios.get(`${URI}/users`, config);
+
+    dispatch({ type: types.GET_USERS, payload: data });
+  } catch (error) {
+    dispatch(setAlert(error.response.data, error.response.status, "error"));
+  }
+};
+
+// GET USERS
+export const getUser = (id) => async (dispatch) => {
+  const config = {
+    header: {
+      "Content-Type": "application/json",
+    },
+  };
+
+  try {
+    const { data } = await axios.get(`${URI}/user/${id}`, config);
+
+    dispatch({ type: types.GET_USER, payload: data });
+  } catch (error) {
+    dispatch(setAlert(error.response.data, error.response.status, "error"));
+  }
+};
+
+// UPDATE USER DATA
+export const updateUser = (body, id, setSubmitting) => async (dispatch) => {
+  const config = {
+    header: {
+      "Content-Type": "application/json",
+    },
+  };
+
+  try {
+    const { data } = await axios.patch(`${URI}/users/${id}`, body, config);
+    dispatch({
+      type: types.UPDATE_USER,
+      payload: data,
+    });
+    dispatch(getUsers());
+    dispatch(setAlert("User Data Updated!", 200, "success"));
+  } catch (error) {
+    console.log(error);
+    dispatch(setAlert("Something went wrong", error.response.status, "error"));
+  } finally {
+    setSubmitting(false);
+  }
+};
