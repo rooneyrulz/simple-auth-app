@@ -1,6 +1,6 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import clsx from "clsx";
 
 import { makeStyles } from "@material-ui/core/styles";
@@ -20,6 +20,8 @@ import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import VpnKeyIcon from "@material-ui/icons/VpnKey";
 import LockOpenIcon from "@material-ui/icons/LockOpen";
 import DashboardIcon from "@material-ui/icons/Dashboard";
+
+import { logOutUser } from "redux/actions/auth";
 
 const drawerWidth = 240;
 
@@ -86,6 +88,7 @@ export default function PersistentDrawerLeft({ children }) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const history = useHistory();
+  const dispatch = useDispatch();
   const { isAuthenticated } = useSelector((state) => state.auth);
 
   const handleDrawerOpen = () => {
@@ -110,7 +113,7 @@ export default function PersistentDrawerLeft({ children }) {
   );
 
   const bottomLinks = isAuthenticated ? (
-    <ListItem button key='logout' onClick={(e) => console.log("logout")}>
+    <ListItem button key='logout' onClick={(e) => dispatch(logOutUser())}>
       <ListItemIcon>
         <ExitToAppIcon />
       </ListItemIcon>

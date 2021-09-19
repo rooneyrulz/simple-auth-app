@@ -2,7 +2,7 @@ import * as types from "redux/actions/types";
 
 const initialState = {
   token: localStorage.getItem("token"),
-  loading: false,
+  loading: true,
   isAuthenticated: null,
   authUser: {},
   users: [],

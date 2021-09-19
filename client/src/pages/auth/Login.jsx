@@ -11,6 +11,10 @@ import {
 import Checkbox from "@mui/material/Checkbox";
 import { Formik } from "formik";
 import * as Yup from "yup";
+
+import { useDispatch } from "react-redux";
+import { loginUser } from "redux/actions/auth";
+import { loginAsAdmin } from "redux/actions/admin";
 import FormField from "shared/FormField";
 
 const useStyles = makeStyles((theme) => ({
@@ -39,17 +43,19 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Login = () => {
-  const [checked, setChecked] = React.useState(false);
   const classes = useStyles();
+  const dispatch = useDispatch();
+  const [checked, setChecked] = React.useState(false);
 
   const initialValues = {
     username: "",
     password: "",
   };
 
-  const onHandleSubmit = async (values, { setSubmitting, resetForm }) => {
-    console.log(values);
-  };
+  const onHandleSubmit = async (values, { setSubmitting, resetForm }) =>
+    checked
+      ? dispatch(loginAsAdmin(values, setSubmitting, resetForm))
+      : dispatch(loginUser(values, setSubmitting, resetForm));
 
   const handleChange = (event) => {
     setChecked(event.target.checked);

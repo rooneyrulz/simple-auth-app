@@ -10,7 +10,9 @@ import {
 } from "@material-ui/core";
 import { Formik } from "formik";
 import * as Yup from "yup";
+import { useDispatch } from "react-redux";
 
+import { registerUser } from "redux/actions/auth";
 import FormField from "shared/FormField";
 
 const useStyles = makeStyles((theme) => ({
@@ -35,6 +37,7 @@ const useStyles = makeStyles((theme) => ({
 
 const Register = () => {
   const classes = useStyles();
+  const dispatch = useDispatch();
 
   const initialValues = {
     username: "",
@@ -42,9 +45,8 @@ const Register = () => {
     password: "",
   };
 
-  const onHandleSubmit = async (values, { setSubmitting, resetForm }) => {
-    console.log(values);
-  };
+  const onHandleSubmit = async (values, { setSubmitting, resetForm }) =>
+    dispatch(registerUser(values, setSubmitting, resetForm));
 
   const validationSchema = Yup.object({
     username: Yup.string().required("required!"),
