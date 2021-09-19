@@ -4,8 +4,10 @@
   "description": "Simple role based authentication app.",
   "main": "server.js",
   "scripts": {
+    "client": "npm start --prefix client",
     "start": "node server.js",
-    "server": "nodemon server.js"
+    "server": "nodemon server.js",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "repository": {
     "type": "git",
