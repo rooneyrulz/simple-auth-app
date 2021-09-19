@@ -37,10 +37,10 @@ const authReducer = (state = initialState, action) => {
         users: payload,
       };
 
-    case types.GET_USER:
+    case types.DELETE_USER:
       return {
         ...state,
-        user: payload,
+        users: state.users.filter((user) => user._id !== payload),
       };
 
     case types.UPDATE_USER:

@@ -24,7 +24,7 @@ export const loginAsAdmin = (body, setSubmitting) => async (dispatch) => {
     dispatch(loadUser());
   } catch (error) {
     dispatch({ type: types.LOGIN_FAIL });
-    dispatch(setAlert(error.response.data, error.response.status, "error"));
+    dispatch(setAlert("Something went wrong!", error.response.status, "error"));
   } finally {
     setSubmitting(false);
   }
@@ -40,27 +40,9 @@ export const getUsers = () => async (dispatch) => {
 
   try {
     const { data } = await axios.get(`${URI}/users`, config);
-
     dispatch({ type: types.GET_USERS, payload: data });
   } catch (error) {
-    dispatch(setAlert(error.response.data, error.response.status, "error"));
-  }
-};
-
-// GET USERS
-export const getUser = (id) => async (dispatch) => {
-  const config = {
-    header: {
-      "Content-Type": "application/json",
-    },
-  };
-
-  try {
-    const { data } = await axios.get(`${URI}/user/${id}`, config);
-
-    dispatch({ type: types.GET_USER, payload: data });
-  } catch (error) {
-    dispatch(setAlert(error.response.data, error.response.status, "error"));
+    dispatch(setAlert("Something went wrong!", error.response.status, "error"));
   }
 };
 
@@ -85,5 +67,22 @@ export const updateUser = (body, id, setSubmitting) => async (dispatch) => {
     dispatch(setAlert("Something went wrong", error.response.status, "error"));
   } finally {
     setSubmitting(false);
+  }
+};
+
+// DELETE USER
+export const deleteUser = (id) => async (dispatch) => {
+  const config = {
+    header: {
+      "Content-Type": "application/json",
+    },
+  };
+
+  try {
+    await axios.delete(`${URI}/users/${id}`, config);
+    dispatch({ type: types.DELETE_USER, payload: id });
+    dispatch(setAlert("User has been deleted!", 200, "success"));
+  } catch (error) {
+    dispatch(setAlert("Something went wrong!", error.response.status, "error"));
   }
 };

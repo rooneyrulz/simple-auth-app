@@ -49,9 +49,9 @@ const Register = () => {
     dispatch(registerUser(values, setSubmitting, resetForm));
 
   const validationSchema = Yup.object({
-    username: Yup.string().required("required!"),
-    email: Yup.string().email("Invalid email!").required("required!"),
-    password: Yup.string().required("required!"),
+    username: Yup.string().required("Invalid username!"),
+    email: Yup.string().email("Invalid email!").required("Invalid email!"),
+    password: Yup.string().required("Invalid password!"),
   });
 
   return (

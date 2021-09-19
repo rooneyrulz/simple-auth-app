@@ -29,17 +29,6 @@ exports.getUsers = async (req, res, next) => {
   }
 };
 
-exports.getUser = async (req, res, next) => {
-  const { id } = req.params;
-  try {
-    if (!req.admin) return res.status(400).send("You dont have permission");
-    const user = await User.findById(id).lean();
-    return res.status(200).json(user);
-  } catch (error) {
-    return res.status(500).json(error);
-  }
-};
-
 exports.updateUser = async (req, res, next) => {
   const { id } = req.params;
   try {
@@ -59,6 +48,17 @@ exports.updateUser = async (req, res, next) => {
     return res.status(200).json(newUser);
   } catch (error) {
     console.log(error.message);
+    return res.status(500).json(error);
+  }
+};
+
+exports.deleteUser = async (req, res, next) => {
+  const { id } = req.params;
+  try {
+    if (!req.admin) return res.status(400).send("You dont have permission");
+    await User.findById(id).remove();
+    return res.status(200).send("User has been deleted");
+  } catch (error) {
     return res.status(500).json(error);
   }
 };

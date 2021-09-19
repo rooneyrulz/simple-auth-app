@@ -11,7 +11,7 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { useDispatch } from "react-redux";
 
 import FormField from "shared/FormField";
-import { updateUser } from "redux/actions/admin";
+import { updateUser, deleteUser } from "redux/actions/admin";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -23,7 +23,8 @@ const useStyles = makeStyles((theme) => ({
     margin: "auto",
   },
   btnLogin: {
-    marginTop: theme.spacing(2),
+    marginTop: theme.spacing(1.5),
+    marginRight: theme.spacing(1),
     padding: theme.spacing(1.5, 3),
   },
   accordion: {
@@ -80,10 +81,21 @@ const UserForm = ({ user }) => {
                   type='submit'
                   variant='contained'
                   color='primary'
+                  size='small'
                   className={classes.btnLogin}
                   disabled={isSubmitting}
                 >
                   {isSubmitting ? <CircularProgress size='1rem' /> : "Update"}
+                </Button>
+                <Button
+                  type='button'
+                  variant='contained'
+                  color='secondary'
+                  size='small'
+                  className={classes.btnLogin}
+                  onClick={(e) => dispatch(deleteUser(user._id))}
+                >
+                  Delete
                 </Button>
               </form>
             )}

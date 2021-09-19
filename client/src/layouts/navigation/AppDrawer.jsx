@@ -89,7 +89,7 @@ export default function PersistentDrawerLeft({ children }) {
   const [open, setOpen] = React.useState(false);
   const history = useHistory();
   const dispatch = useDispatch();
-  const { isAuthenticated } = useSelector((state) => state.auth);
+  const { isAuthenticated, authUser } = useSelector((state) => state.auth);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -99,18 +99,26 @@ export default function PersistentDrawerLeft({ children }) {
     setOpen(false);
   };
 
-  const topLinks = (
-    <ListItem
-      button
-      key='dashboard'
-      onClick={(e) => history.push("/dashboard")}
-    >
-      <ListItemIcon>
-        <DashboardIcon />
-      </ListItemIcon>
-      <ListItemText primary='Dashboard' />
-    </ListItem>
-  );
+  const topLinks =
+    isAuthenticated && authUser.role === "user" ? (
+      <ListItem
+        button
+        key='dashboard'
+        onClick={(e) => history.push("/dashboard")}
+      >
+        <ListItemIcon>
+          <DashboardIcon />
+        </ListItemIcon>
+        <ListItemText primary='Dashboard' />
+      </ListItem>
+    ) : isAuthenticated && authUser.role === "admin" ? (
+      <ListItem button key='users' onClick={(e) => history.push("/users")}>
+        <ListItemIcon>
+          <DashboardIcon />
+        </ListItemIcon>
+        <ListItemText primary='Users' />
+      </ListItem>
+    ) : null;
 
   const bottomLinks = isAuthenticated ? (
     <ListItem button key='logout' onClick={(e) => dispatch(logOutUser())}>
@@ -160,7 +168,7 @@ export default function PersistentDrawerLeft({ children }) {
             <MenuIcon />
           </IconButton>
           <Typography variant='h6' noWrap>
-            Ecologital Test Authentication
+            Ecologital Authentication
           </Typography>
         </Toolbar>
       </AppBar>
@@ -189,7 +197,7 @@ export default function PersistentDrawerLeft({ children }) {
         </div>
         <Divider />
         <List>{topLinks}</List>
-        <Divider />
+        {topLinks ? <Divider /> : null}
         <List>{bottomLinks}</List>
       </Drawer>
       <main
