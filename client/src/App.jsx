@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 
 import AppDrawer from "layouts/navigation/AppDrawer";
 import Alert from "layouts/alert/Alert";
-import Routes from "./components/routing/Routes";
+import Routes from "components/routing/Routes";
 
 import { setAuthToken } from "utils/headers";
 import { loadUser } from "redux/actions/auth";

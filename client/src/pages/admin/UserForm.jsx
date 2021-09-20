@@ -39,7 +39,7 @@ const UserForm = ({ user }) => {
   const initialValues = {
     username: user?.username ?? "",
     email: user?.email ?? "",
-    password: user?.password ?? "",
+    password: "",
   };
 
   const onHandleSubmit = (values, { setSubmitting }) =>
