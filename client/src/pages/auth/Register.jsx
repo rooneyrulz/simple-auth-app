@@ -12,7 +12,7 @@ import { Formik } from "formik";
 import * as Yup from "yup";
 import { useDispatch } from "react-redux";
 
-import { registerUser } from "redux/actions/auth";
+import { registerUser } from "redux/actions/user";
 import FormField from "components/shared/FormField";
 
 const useStyles = makeStyles((theme) => ({

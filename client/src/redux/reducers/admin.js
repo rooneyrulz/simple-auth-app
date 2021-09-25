@@ -1,28 +1,27 @@
 import * as types from "redux/actions/types";
 
 const initialState = {
-  token: localStorage.getItem("token"),
+  token: localStorage.getItem("admin__token"),
   loading: true,
   isAuthenticated: null,
-  authUser: {},
+  admin: {},
   users: [],
 };
 
-const authReducer = (state = initialState, action) => {
+const adminReducer = (state = initialState, action) => {
   const { type, payload } = action;
 
   switch (type) {
-    case types.USER_LOADED:
+    case types.ADMIN_LOADED:
       return {
         ...state,
         isAuthenticated: true,
         loading: false,
-        authUser: payload,
+        admin: payload,
       };
 
-    case types.REGISTER_SUCCESS:
-    case types.LOGIN_SUCCESS:
-      localStorage.setItem("token", payload.token);
+    case types.ADMIN_LOGIN_SUCCESS:
+      localStorage.setItem("admin__token", payload.token);
       return {
         ...state,
         ...payload,
@@ -50,16 +49,16 @@ const authReducer = (state = initialState, action) => {
         ),
       };
 
-    case types.REGISTER_FAIL:
-    case types.LOGIN_FAIL:
-    case types.AUTH_ERROR:
-    case types.LOGOUT:
-      localStorage.removeItem("token");
+    case types.ADMIN_LOGIN_FAIL:
+    case types.ADMIN_AUTH_ERROR:
+    case types.ADMIN_LOGOUT:
+      localStorage.removeItem("admin__token");
       return {
         ...state,
+        token: null,
         isAuthenticated: false,
         loading: false,
-        authUser: null,
+        admin: null,
         users: [],
       };
 
@@ -68,4 +67,4 @@ const authReducer = (state = initialState, action) => {
   }
 };
 
-export default authReducer;
+export default adminReducer;

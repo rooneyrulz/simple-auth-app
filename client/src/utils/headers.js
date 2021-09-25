@@ -1,10 +1,18 @@
 import axios from "axios";
 
-export const setAuthToken = (token) => {
+export const setUserAuthToken = (token) => {
   if (token) {
-    axios.defaults.headers["x-auth-token"] = token;
+    axios.defaults.headers["x-user-auth-token"] = token;
   } else {
-    delete axios.defaults.headers["x-auth-token"];
+    delete axios.defaults.headers["x-user-auth-token"];
+  }
+};
+
+export const setAdminAuthToken = (token) => {
+  if (token) {
+    axios.defaults.headers["x-admin-auth-token"] = token;
+  } else {
+    delete axios.defaults.headers["x-admin-auth-token"];
   }
 };
 

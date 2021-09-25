@@ -4,25 +4,20 @@ import { connect } from "react-redux";
 
 import AppLoader from "layouts/AppLoader";
 
-const PrivateRoute = ({
-  component: Component,
-  auth: { loading, isAuthenticated, authUser },
-  ...rest
-}) => {
-  console.log(rest);
+const PrivateRoute = ({ component: Component, user, admin, ...rest }) => {
   return (
     <Route
       render={(props) => {
-        if (loading) {
+        if (user.loading) {
           return <AppLoader />;
         }
-        if (!isAuthenticated) {
+        if (!user.isAuthenticated) {
           return <Redirect to='/' />;
         }
-        if (isAuthenticated && authUser.role === "admin") {
+        if (admin.isAuthenticated && admin.admin.role === "admin") {
           return <Redirect to='/users' />;
         }
-        if (isAuthenticated && authUser.role === "user") {
+        if (user.isAuthenticated && user.user.role === "user") {
           return <Component {...props} />;
         }
       }}
@@ -32,7 +27,8 @@ const PrivateRoute = ({
 };
 
 const mapStateToProps = (state) => ({
-  auth: state.auth,
+  user: state.user,
+  admin: state.admin,
 });
 
 export default connect(mapStateToProps)(PrivateRoute);

@@ -3,7 +3,7 @@ import { Slide } from "@material-ui/core";
 import { useSelector } from "react-redux";
 
 const Dashboard = () => {
-  const auth = useSelector((state) => state.auth);
+  const user = useSelector((state) => state.user);
 
   React.useEffect(() => {
     document.title = "Dashboard - Ecologital";
@@ -11,7 +11,7 @@ const Dashboard = () => {
 
   return (
     <Slide direction='right' in={true} mountOnEnter unmountOnExit>
-      <div>Welcome {auth?.authUser?.username ?? ""}</div>
+      <div>Welcome {user?.user?.username ?? ""}</div>
     </Slide>
   );
 };

@@ -4,19 +4,15 @@ import { connect } from "react-redux";
 
 import AppLoader from "layouts/AppLoader";
 
-const GuestRoute = ({
-  component: Component,
-  auth: { loading, isAuthenticated, authUser },
-  ...rest
-}) => {
+const GuestRoute = ({ component: Component, user, admin, ...rest }) => {
   return (
     <Route
       render={(props) => {
-        if (loading) {
+        if (user.loading || admin.loading) {
           return <AppLoader />;
-        } else if (isAuthenticated && authUser.role === "user") {
+        } else if (user.isAuthenticated && user.user.role === "user") {
           return <Redirect to='/dashboard' />;
-        } else if (isAuthenticated && authUser.role === "admin") {
+        } else if (admin.isAuthenticated && admin.admin.role === "admin") {
           return <Redirect to='/users' />;
         } else {
           return <Component {...props} />;
@@ -28,7 +24,8 @@ const GuestRoute = ({
 };
 
 const mapStateToProps = (state) => ({
-  auth: state.auth,
+  user: state.user,
+  admin: state.admin,
 });
 
 export default connect(mapStateToProps)(GuestRoute);

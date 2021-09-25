@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
 const Users = () => {
   const styles = useStyles();
   const dispatch = useDispatch();
-  const auth = useSelector((state) => state.auth);
+  const admin = useSelector((state) => state.admin);
 
   React.useEffect(() => {
     dispatch(getUsers());
@@ -27,8 +27,8 @@ const Users = () => {
 
   return (
     <div className={styles.root}>
-      {auth.users.length ? (
-        auth.users.map((user) => <UserForm user={user} key={user._id} />)
+      {admin.users.length ? (
+        admin.users.map((user) => <UserForm user={user} key={user._id} />)
       ) : (
         <p>No Users Found.</p>
       )}

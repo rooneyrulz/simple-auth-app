@@ -21,7 +21,8 @@ import VpnKeyIcon from "@material-ui/icons/VpnKey";
 import LockOpenIcon from "@material-ui/icons/LockOpen";
 import DashboardIcon from "@material-ui/icons/Dashboard";
 
-import { logOutUser } from "redux/actions/auth";
+import { logOutUser } from "redux/actions/user";
+import { logOutAdmin } from "redux/actions/admin";
 
 const drawerWidth = 240;
 
@@ -86,10 +87,12 @@ const useStyles = makeStyles((theme) => ({
 
 export default function PersistentDrawerLeft({ children }) {
   const classes = useStyles();
-  const [open, setOpen] = React.useState(false);
   const history = useHistory();
   const dispatch = useDispatch();
-  const { isAuthenticated, authUser } = useSelector((state) => state.auth);
+
+  const [open, setOpen] = React.useState(false);
+  const user = useSelector((state) => state.user);
+  const admin = useSelector((state) => state.admin);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -100,7 +103,7 @@ export default function PersistentDrawerLeft({ children }) {
   };
 
   const topLinks =
-    isAuthenticated && authUser.role === "user" ? (
+    user.isAuthenticated && user.user.role === "user" ? (
       <ListItem
         button
         key='dashboard'
@@ -111,7 +114,7 @@ export default function PersistentDrawerLeft({ children }) {
         </ListItemIcon>
         <ListItemText primary='Dashboard' />
       </ListItem>
-    ) : isAuthenticated && authUser.role === "admin" ? (
+    ) : admin.isAuthenticated && admin.admin.role === "admin" ? (
       <ListItem button key='users' onClick={(e) => history.push("/users")}>
         <ListItemIcon>
           <DashboardIcon />
@@ -120,8 +123,15 @@ export default function PersistentDrawerLeft({ children }) {
       </ListItem>
     ) : null;
 
-  const bottomLinks = isAuthenticated ? (
+  const bottomLinks = user.isAuthenticated ? (
     <ListItem button key='logout' onClick={(e) => dispatch(logOutUser())}>
+      <ListItemIcon>
+        <ExitToAppIcon />
+      </ListItemIcon>
+      <ListItemText primary='Logout' />
+    </ListItem>
+  ) : admin.isAuthenticated ? (
+    <ListItem button key='logout' onClick={(e) => dispatch(logOutAdmin())}>
       <ListItemIcon>
         <ExitToAppIcon />
       </ListItemIcon>

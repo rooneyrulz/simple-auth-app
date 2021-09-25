@@ -4,24 +4,20 @@ import { connect } from "react-redux";
 
 import AppLoader from "layouts/AppLoader";
 
-const AdminRoute = ({
-  component: Component,
-  auth: { loading, isAuthenticated, authUser },
-  ...rest
-}) => {
+const AdminRoute = ({ component: Component, user, admin, ...rest }) => {
   return (
     <Route
       render={(props) => {
-        if (loading) {
+        if (admin.loading) {
           return <AppLoader />;
         }
-        if (!isAuthenticated) {
+        if (!admin.isAuthenticated) {
           return <Redirect to='/' />;
         }
-        if (isAuthenticated && authUser.role === "user") {
+        if (user.isAuthenticated && user.user.role === "user") {
           return <Redirect to='/dashboard' />;
         }
-        if (isAuthenticated && authUser.role === "admin") {
+        if (admin.isAuthenticated && admin.admin.role === "admin") {
           return <Component {...props} />;
         }
       }}
@@ -31,7 +27,8 @@ const AdminRoute = ({
 };
 
 const mapStateToProps = (state) => ({
-  auth: state.auth,
+  user: state.user,
+  admin: state.admin,
 });
 
 export default connect(mapStateToProps)(AdminRoute);
