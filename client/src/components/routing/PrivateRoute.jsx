@@ -2,13 +2,14 @@ import React from "react";
 import { Route, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 
-import AppLoader from "../../layouts/AppLoader";
+import AppLoader from "layouts/AppLoader";
 
 const PrivateRoute = ({
   component: Component,
   auth: { loading, isAuthenticated, authUser },
   ...rest
 }) => {
+  console.log(rest);
   return (
     <Route
       render={(props) => {

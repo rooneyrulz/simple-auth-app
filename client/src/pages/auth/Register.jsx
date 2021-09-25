@@ -13,7 +13,7 @@ import * as Yup from "yup";
 import { useDispatch } from "react-redux";
 
 import { registerUser } from "redux/actions/auth";
-import FormField from "shared/FormField";
+import FormField from "components/shared/FormField";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -53,6 +53,10 @@ const Register = () => {
     email: Yup.string().email("Invalid email!").required("Invalid email!"),
     password: Yup.string().required("Invalid password!"),
   });
+
+  React.useEffect(() => {
+    document.title = "Register - Ecologital";
+  }, []);
 
   return (
     <Slide direction='right' in={true} mountOnEnter unmountOnExit>

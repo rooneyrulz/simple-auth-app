@@ -15,7 +15,7 @@ import * as Yup from "yup";
 import { useDispatch } from "react-redux";
 import { loginUser } from "redux/actions/auth";
 import { loginAsAdmin } from "redux/actions/admin";
-import FormField from "shared/FormField";
+import FormField from "components/shared/FormField";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -65,6 +65,10 @@ const Login = () => {
     username: Yup.string().required("Invalid username!"),
     password: Yup.string().required("Invalid password!"),
   });
+
+  React.useEffect(() => {
+    document.title = "Login - Ecologital";
+  }, []);
 
   return (
     <Slide direction='right' in={true} mountOnEnter unmountOnExit>

@@ -21,6 +21,10 @@ const Users = () => {
     dispatch(getUsers());
   }, [dispatch]);
 
+  React.useEffect(() => {
+    document.title = "Admin Panel - Ecologital";
+  }, []);
+
   return (
     <div className={styles.root}>
       {auth.users.length ? (
