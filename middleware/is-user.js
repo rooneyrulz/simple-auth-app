@@ -20,9 +20,7 @@ module.exports = (req, res, next) => {
       return res.status(401).send("Authorization failed..");
     } else {
       req.isAuth = true;
-      if (decoded.user && decoded.user.role === "admin")
-        req.admin = decoded.user;
-      if (decoded.user && decoded.user.role === "user") req.user = decoded.user;
+      req.user = decoded.user;
       req.userData = decoded;
       return next();
     }

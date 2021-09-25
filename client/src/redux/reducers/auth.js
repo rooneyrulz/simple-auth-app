@@ -6,7 +6,6 @@ const initialState = {
   isAuthenticated: null,
   authUser: {},
   users: [],
-  user: {},
 };
 
 const authReducer = (state = initialState, action) => {
@@ -61,6 +60,7 @@ const authReducer = (state = initialState, action) => {
         isAuthenticated: false,
         loading: false,
         authUser: null,
+        users: [],
       };
 
     default:

@@ -10,11 +10,11 @@ exports.login = async (req, res, next) => {
       return res.status(404).send("Invalid credentials..");
     if (password !== "admin")
       return res.status(400).send("Invalid credentials..");
-    const user = { _id: 1, username, password: null, role: "admin" };
-    const token = sign({ user }, process.env.JWT_SECRET, {
+    const admin = { _id: 1, username, password: null, role: "admin" };
+    const token = sign({ admin }, process.env.JWT_SECRET, {
       expiresIn: 360000,
     });
-    return res.status(200).json({ token, user });
+    return res.status(200).json({ token, admin });
   } catch (error) {
     return res.status(500).send(error.message);
   }
@@ -60,5 +60,15 @@ exports.deleteUser = async (req, res, next) => {
     return res.status(200).send("User has been deleted");
   } catch (error) {
     return res.status(500).json(error);
+  }
+};
+
+exports.getAuthAdmin = async (req, res, next) => {
+  try {
+    if (!req.admin)
+      return res.status(400).send("Admin not found, Authorization denied..");
+    return res.status(200).json({ ...req.admin, password: null });
+  } catch (error) {
+    return res.status(500).send(error.message);
   }
 };
