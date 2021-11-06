@@ -12,8 +12,6 @@ import { useDispatch } from "react-redux";
 
 import FormField from "components/shared/FormField";
 import { updateUser, deleteUser } from "redux/actions/admin";
-import { AdminActions } from "redux/types/admin";
-import { AppDispatch } from "redux/store";
 
 const useStyles = makeStyles((theme) => ({
   root: {

@@ -35,7 +35,6 @@ exports.login = async (req, res, next) => {
 
 exports.getAuthUser = async (req, res, next) => {
   try {
-    if (req.admin) return res.status(200).json(req.admin);
     const user = await User.findById(req.user._id).lean();
     if (!user)
       return res.status(400).send("User not found, Authorization denied..");
