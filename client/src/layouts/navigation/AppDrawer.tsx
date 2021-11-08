@@ -183,7 +183,7 @@ const PersistentDrawerLeft: React.FC<Props> = ({ children }): JSX.Element => {
             <MenuIcon />
           </IconButton>
           <Typography variant='h6' noWrap>
-            Ecologital Authentication
+            Simple Auth
           </Typography>
         </Toolbar>
       </AppBar>

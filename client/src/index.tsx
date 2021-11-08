@@ -15,5 +15,5 @@ ReactDOM.render(
       </Provider>
     </React.Suspense>
   </React.StrictMode>,
-  document.getElementById("ecologital")
+  document.getElementById("simple__auth")
 );
