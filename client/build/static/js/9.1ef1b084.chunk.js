@@ -1,0 +1,2 @@
+(this["webpackJsonptest-app"]=this["webpackJsonptest-app"]||[]).push([[9],{439:function(n,t,e){"use strict";e.r(t);var i=e(0),u=e.n(i),c=e(181),r=e(12),s=e(2);t.default=function(){var n,t,e=Object(r.c)((function(n){return n.user}));return u.a.useEffect((function(){document.title="Dashboard"}),[]),Object(s.jsx)(c.a,{direction:"right",in:!0,mountOnEnter:!0,unmountOnExit:!0,children:Object(s.jsxs)("div",{children:["Welcome ",null!==(n=null===e||void 0===e||null===(t=e.user)||void 0===t?void 0:t.username)&&void 0!==n?n:""]})})}}}]);
+//# sourceMappingURL=9.1ef1b084.chunk.js.map
