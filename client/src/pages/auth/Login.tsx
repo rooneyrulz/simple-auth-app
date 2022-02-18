@@ -75,7 +75,7 @@ const Login: React.FC = (): JSX.Element => {
   });
 
   React.useEffect(() => {
-    document.title = "Login - Ecologital";
+    document.title = "Login";
   }, []);
 
   return (

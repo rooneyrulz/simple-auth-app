@@ -63,7 +63,7 @@ const Register: React.FC = (): JSX.Element => {
   });
 
   React.useEffect(() => {
-    document.title = "Register - Ecologital";
+    document.title = "Register";
   }, []);
 
   return (

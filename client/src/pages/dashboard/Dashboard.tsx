@@ -7,7 +7,7 @@ const Dashboard: React.FC = (): JSX.Element => {
   const user = useSelector((state: RootState) => state.user);
 
   React.useEffect(() => {
-    document.title = "Dashboard - Ecologital";
+    document.title = "Dashboard";
   }, []);
 
   return (

@@ -23,7 +23,7 @@ const Users: React.FC = (): JSX.Element => {
   }, [dispatch]);
 
   React.useEffect(() => {
-    document.title = "Admin Panel - Ecologital";
+    document.title = "Admin Panel";
   }, []);
 
   return (
