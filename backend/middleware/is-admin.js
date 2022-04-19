@@ -1,5 +1,6 @@
 const { verify } = require("jsonwebtoken");
 
+
 module.exports = (req, res, next) => {
   const token = req.get("x-admin-auth-token");
   if (!token || token === "") {
@@ -18,10 +19,15 @@ module.exports = (req, res, next) => {
     if (!decoded) {
       req.isAuth = false;
       return res.status(401).send("Authorization failed..");
-    } else {
-      req.isAuth = true;
-      req.admin = decoded.admin;
-      return next();
     }
+
+    if (decoded?.admin?.role !== 'admin') {
+      req.isAuth = false;
+      return res.status(401).send("Authorization failed..");
+    }
+
+    req.isAuth = true;
+    req.admin = decoded.admin;
+    return next();
   }
 };

@@ -22,3 +22,5 @@ export const setAlert =
 
 export const removeAlert = (id: number) => (dispatch: Dispatch<AlertActions>) =>
   dispatch({ type: types.REMOVE_ALERT, payload: id });
+
+export type AlertActionsType = typeof setAlert | typeof removeAlert

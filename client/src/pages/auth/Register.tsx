@@ -8,12 +8,13 @@ import {
   Slide,
   CircularProgress,
 } from "@material-ui/core";
+import Checkbox from "@mui/material/Checkbox";
 import { Formik } from "formik";
 import * as Yup from "yup";
 import { useDispatch } from "react-redux";
 
 import { registerUser } from "redux/actions/user";
-import FormField from "components/shared/FormField";
+import FormField from "pages/auth/FormField";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -33,6 +34,11 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(2),
     padding: theme.spacing(1.5, 3),
   },
+  checkboxWrapper: {
+    display: "flex",
+    justifyContent: "flex-start",
+    marginTop: theme.spacing(2),
+  },
 }));
 
 interface IInitialValues {
@@ -44,6 +50,7 @@ interface IInitialValues {
 const Register: React.FC = (): JSX.Element => {
   const classes = useStyles();
   const dispatch = useDispatch();
+  const [checked, setChecked] = React.useState<boolean>(false);
 
   const initialValues: IInitialValues = {
     username: "",
@@ -54,7 +61,18 @@ const Register: React.FC = (): JSX.Element => {
   const onHandleSubmit = async (
     values: IInitialValues,
     { setSubmitting }: any
-  ) => dispatch(registerUser(values, setSubmitting));
+  ) =>
+    dispatch(
+      registerUser(
+        { ...values, role: checked ? "admin" : "user" },
+        setSubmitting,
+        checked
+      )
+    );
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setChecked(event.target.checked);
+  };
 
   const validationSchema = Yup.object({
     username: Yup.string().required("Invalid username!"),
@@ -97,6 +115,14 @@ const Register: React.FC = (): JSX.Element => {
                 </form>
               )}
             </Formik>
+            <div className={classes.checkboxWrapper}>
+              <Checkbox
+                checked={checked}
+                onChange={handleChange}
+                inputProps={{ "aria-label": "controlled" }}
+              />
+              <p>Register As Admin</p>
+            </div>
           </CardContent>
         </Card>
       </Grid>

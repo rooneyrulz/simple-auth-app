@@ -28,9 +28,22 @@ const Users: React.FC = (): JSX.Element => {
 
   return (
     <div className={styles.root}>
-      {admin.users?.map((user: any) => (
-        <UserForm user={user} key={user._id} />
-      )) ?? <p>No Users Found.</p>}
+      <div style={{ marginBottom: '5rem' }}>
+      <h4>Users</h4>
+        {admin.users
+          ?.filter((user: any) => user.role === "user")
+          ?.map((user: any) => <UserForm user={user} key={user._id} />) ?? (
+          <p>No Users Found.</p>
+        )}
+      </div>
+      <div>
+        <h4>Admins</h4>
+        {admin.users
+          ?.filter((user: any) => user.role === "admin")
+          ?.map((user: any) => <UserForm user={user} key={user._id} />) ?? (
+          <p>No Users Found.</p>
+        )}
+      </div>
     </div>
   );
 };

@@ -8,6 +8,7 @@ import types from "./types";
 
 const URI = "http://localhost:5000/api/v1/admin";
 
+
 // LOAD ADMIN
 export const loadAdmin = () => async (dispatch: Dispatch<AdminActions>) => {
   if (localStorage.admin__token) setAdminAuthToken(localStorage.admin__token);
@@ -30,7 +31,7 @@ export const loadAdmin = () => async (dispatch: Dispatch<AdminActions>) => {
 // LOGIN ADMIN
 export const loginAsAdmin =
   (body: any, setSubmitting: any) =>
-  async (dispatch: Dispatch<AdminActions | AlertActions>) => {
+  async (dispatch: Dispatch<AdminActions>) => {
     const config: any = {
       header: {
         "Content-Type": "application/json",

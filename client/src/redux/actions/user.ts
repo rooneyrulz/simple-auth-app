@@ -4,6 +4,7 @@ import types from "./types";
 import { setUserAuthToken } from "utils/headers";
 import { setAlert } from "./alert";
 import { UserActions } from "redux/types/user";
+import { AdminActions } from "redux/types/admin";
 import { AlertActions } from "redux/types/alert";
 
 const URI = "http://localhost:5000/api/v1/user";
@@ -66,8 +67,9 @@ export const loginUser =
 
 // REGISTER USER
 export const registerUser =
-  (body: any, setSubmitting: any) =>
-  async (dispatch: Dispatch<UserActions | AlertActions>) => {
+  (body: any, setSubmitting: any, isAdmin: Boolean) =>
+  async (dispatch: Dispatch<UserActions | AdminActions | AlertActions>) => {
+    console.log(body);
     const config: any = {
       header: {
         "Content-Type": "application/json",
@@ -76,10 +78,15 @@ export const registerUser =
 
     try {
       const { data } = await axios.post(`${URI}/register`, body, config);
-      dispatch({
-        type: types.USER_REGISTER_SUCCESS,
-        payload: data,
-      });
+      isAdmin
+        ? dispatch({
+            type: types.ADMIN_REGISTER_SUCCESS,
+            payload: data,
+          })
+        : dispatch({
+            type: types.USER_REGISTER_SUCCESS,
+            payload: data,
+          });
       dispatch<any>(
         setAlert({
           msg: "Register successful!",

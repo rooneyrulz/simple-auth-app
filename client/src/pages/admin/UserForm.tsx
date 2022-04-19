@@ -10,7 +10,7 @@ import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { useDispatch } from "react-redux";
 
-import FormField from "components/shared/FormField";
+import FormField from "pages/auth/FormField";
 import { updateUser, deleteUser } from "redux/actions/admin";
 
 const useStyles = makeStyles((theme) => ({

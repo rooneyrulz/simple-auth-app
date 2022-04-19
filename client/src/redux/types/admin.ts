@@ -13,6 +13,11 @@ interface IAdminLoaded {
   payload: IAdmin;
 }
 
+interface IAdminRegisterSuccess {
+  type: typeof types.ADMIN_REGISTER_SUCCESS;
+  payload: { token: string; admin: IAdmin };
+}
+
 interface IAdminLoginSuccess {
   type: typeof types.ADMIN_LOGIN_SUCCESS;
   payload: { token: string; admin: IAdmin };
@@ -51,6 +56,7 @@ interface IAdminLogout {
 export type AdminActions =
   | IAdminLoaded
   | IAdminLoginSuccess
+  | IAdminRegisterSuccess
   | IAdminLoginFail
   | IAdminAuthError
   | IAdminLogout

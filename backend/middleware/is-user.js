@@ -18,11 +18,16 @@ module.exports = (req, res, next) => {
     if (!decoded) {
       req.isAuth = false;
       return res.status(401).send("Authorization failed..");
-    } else {
-      req.isAuth = true;
-      req.user = decoded.user;
-      req.userData = decoded;
-      return next();
     }
+
+    if (decoded?.user?.role !== 'user') {
+      req.isAuth = false;
+      return res.status(401).send("Authorization failed..");
+    }
+
+    req.isAuth = true;
+    req.user = decoded.user;
+    req.userData = decoded;
+    return next();
   }
 };

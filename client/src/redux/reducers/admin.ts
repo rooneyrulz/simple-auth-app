@@ -25,6 +25,7 @@ const adminReducer = (
       };
 
     case types.ADMIN_LOGIN_SUCCESS:
+    case types.ADMIN_REGISTER_SUCCESS:
       localStorage.setItem("admin__token", action.payload.token);
       return {
         ...state,

@@ -15,7 +15,7 @@ import * as Yup from "yup";
 import { useDispatch } from "react-redux";
 import { loginUser } from "redux/actions/user";
 import { loginAsAdmin } from "redux/actions/admin";
-import FormField from "components/shared/FormField";
+import FormField from "pages/auth/FormField";
 
 const useStyles = makeStyles((theme) => ({
   root: {
