@@ -6,7 +6,7 @@ module.exports = async (server) => {
     console.log("mongo connection successful..".yellow.underline.bold);
 
     // Listening to server
-    server.listen(process.env.PORT || 5000, () =>
+    await server.listen(process.env.PORT || 5000, () =>
       console.log(
         `server running on ${process.env.NODE_ENV} mode, port ${process.env.PORT}..`
           .cyan.bold
