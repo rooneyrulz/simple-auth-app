@@ -1,5 +1,5 @@
 # simple-auth-app
-Simple role based authentication app with MERN stack for Ecologital.
+Simple role based authentication app with MERN stack.
 
 Here are the steps that you need to follow to run the app on your machine, Incase you need
 
@@ -21,3 +21,6 @@ You can run frontend and backend separately,
 commands:
 1. frontend-only  ->  Run "npm start" from the client directory.
 2. backend-only   ->  Run "npm run server" from the root directory.
+
+
+Happy Coding :)
